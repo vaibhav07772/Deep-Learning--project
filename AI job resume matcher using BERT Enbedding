@@ -1,12 +1,15 @@
-from sentence_transformers import SentenceTransformer, util  # Import model & similarity function
+## Import model & similarity function
+from sentence_transformers import SentenceTransformer, util
 
-model = SentenceTransformer('all-MiniLM-L6-v2')  # Load pre-trained lightweight BERT model
 
-resume = "Experienced Data Analyst skilled in Python, SQL, and Power BI with a background in statistical modeling and business intelligence."  # Sample resume
-job_desc = "We need a candidate with strong Python and NLP skills"    # Sample job description
+## Load pre-trained lightweight BERT model
+model = SentenceTransformer('all-MiniLM-L6-v2')  
 
-resume_emb = model.encode(resume, convert_to_tensor=True)  # Encode resume into vector
-job_emb = model.encode(job_desc, convert_to_tensor=True)   # Encode job description into vector
+resume = "Experienced Data Analyst skilled in Python, SQL, and Power BI with a background in statistical modeling and business intelligence."  ##--> Sample resume
+job_desc = "We need a candidate with strong Python and NLP skills"    ##---> Sample job description
 
-score = util.pytorch_cos_sim(resume_emb, job_emb)# Calculate cosine similarity
-print("Match Score:", score.item())# Show similarity score (0 to 1)
+resume_emb = model.encode(resume, convert_to_tensor=True)  ##----> Encode resume into vector
+job_emb = model.encode(job_desc, convert_to_tensor=True)   ##----> Encode job description into vector
+
+score = util.pytorch_cos_sim(resume_emb, job_emb) ##---> Calculate cosine similarity
+print("Match Score:", score.item()) ##----> Show similarity score (0 to 1)
